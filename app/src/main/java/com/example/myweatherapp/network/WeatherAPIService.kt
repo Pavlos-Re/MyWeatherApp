@@ -8,7 +8,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
 
-private const val BASE_URL = "http://api.weatherapi.com/v1/"
+private const val BASE_URL = "https://api.weatherapi.com/v1/"
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
@@ -19,7 +19,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface WeatherAPIService {
-    @GET("forecast.json?key=36d7cb024f314771be4113602231304&q=London&days=1&aqi=yes&alerts=yes")
+    @GET("forecast.json?key=36d7cb024f314771be4113602231304&q=London&days=1&aqi=yes&alerts=no")
     suspend fun getWeatherInfo(): WeatherData
 }
 

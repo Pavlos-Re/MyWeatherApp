@@ -1,5 +1,6 @@
 package com.example.myweatherapp.views
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -11,6 +12,8 @@ fun MainMenu(weatherViewModel: ViewModelScreen = viewModel()) {
     val weatherUiState by weatherViewModel.uiState.collectAsState()
 
     val weather = weatherUiState.curWeather
+
+    Text("Hello")
 
     if (weather != null) {
         println("The weather is: ${weather.current.condition.text} ")
