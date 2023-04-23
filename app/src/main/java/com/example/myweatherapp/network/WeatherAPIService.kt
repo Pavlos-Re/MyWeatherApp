@@ -19,8 +19,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface WeatherAPIService {
-    @GET("forecast.json?key=36d7cb024f314771be4113602231304&q=London&days=1&aqi=yes&alerts=no")
-    suspend fun getWeatherInfo(): WeatherData
+    @GET("forecast.json?key=36d7cb024f314771be4113602231304&q=Athens&days=1&aqi=no&alerts=no")
+    suspend fun getWeatherInfo(country: String): WeatherData
 }
 
 object WeatherAPI {

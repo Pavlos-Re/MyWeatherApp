@@ -16,13 +16,15 @@ class ViewModelScreen: ViewModel() {
     val uiState : StateFlow<WeatherUiState> = _uiState.asStateFlow()
 
     init {
-        getWeatherInfo()
+        val country = "Athens"
+        getWeatherInfo(country)
     }
 
-    private fun getWeatherInfo() {
+    private fun getWeatherInfo(country: String) {
         viewModelScope.launch {
             try {
-                val listResult = WeatherAPI.retrofitService.getWeatherInfo()
+                val listResult = WeatherAPI.retrofitService.getWeatherInfo("Athens")
+                _uiState.value = WeatherUiState(listResult)
                 println("The result is: ${listResult.current}")
             } catch (e: Exception) {
                 println("ERROR -- >  ${e.message}")
