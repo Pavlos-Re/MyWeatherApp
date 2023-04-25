@@ -33,7 +33,7 @@ fun MainMenu(weatherViewModel: ViewModelScreen = viewModel()) {
 fun Background(weather: WeatherData?) {
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("The weather is: ${weather!!.current.condition.text} ")
+        Text("The weather is: ${weather!!.current.condition.text} for location: ${weather.location.country} and town: ${weather.location.name}")
 
         var str = weather.current.condition.icon
         str = "https:" + str

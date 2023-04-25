@@ -22,7 +22,7 @@ class ViewModelScreen: ViewModel() {
     private fun getWeatherInfo() {
         viewModelScope.launch {
             try {
-                val listResult = WeatherAPI.retrofitService.getWeatherInfo()
+                val listResult = WeatherAPI.retrofitService.getWeatherInfo("36d7cb024f314771be4113602231304","Athens", "1", "no", "no")
                 _uiState.value = WeatherUiState(listResult)
                 println("The result is: ${listResult.current}")
             } catch (e: Exception) {
