@@ -26,7 +26,6 @@ fun MainMenu(weatherViewModel: ViewModelScreen = viewModel()) {
         Background(weather)
     }
 
-
 }
 
 @Composable
