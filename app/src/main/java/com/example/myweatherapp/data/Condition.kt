@@ -2,6 +2,6 @@ package com.example.myweatherapp.data
 
 data class Condition(
     val code: Int,
-    val icon: String,
-    val text: String
+    var icon: String,
+    var text: String
 )
