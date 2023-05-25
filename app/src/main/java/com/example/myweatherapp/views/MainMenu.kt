@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -72,7 +73,17 @@ fun Background(weather: WeatherData?, weatherViewModel: ViewModelScreen) {
 
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
-        Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(bottom = 100.dp)) {
+
+        Text("Weather info: ", fontWeight = FontWeight.Bold)
+        Text("Country: $country")
+        Text("Town: ${weather!!.location.name}")
+        Text("Condition: ${weather.current.condition.text}")
+        Text("Temperature: ${weather.current.temp_c}")
+
+        AsyncImage(model = "https:$str", contentDescription = "Image", modifier = Modifier.size(100.dp,100.dp))
+
+        Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(top = 100.dp)) {
+
             TextField(value = text,
                 onValueChange = {newText -> text = newText},
                 maxLines = 1,
@@ -102,14 +113,6 @@ fun Background(weather: WeatherData?, weatherViewModel: ViewModelScreen) {
                 Text(text = "Show Me!")
             }
         }
-
-        Text("Weather info: ", fontWeight = FontWeight.Bold)
-        Text("Country: $country")
-        Text("Town: ${weather!!.location.name}")
-        Text("Condition: ${weather.current.condition.text}")
-        Text("Temperature: ${weather.current.temp_c}")
-
-        AsyncImage(model = "https:$str", contentDescription = "Image", modifier = Modifier.size(100.dp,100.dp))
 
     }
 
