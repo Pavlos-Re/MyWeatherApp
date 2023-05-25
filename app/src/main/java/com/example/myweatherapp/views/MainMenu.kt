@@ -1,5 +1,6 @@
 package com.example.myweatherapp.views
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -65,6 +68,8 @@ fun Background(weather: WeatherData?, weatherViewModel: ViewModelScreen) {
          mutableStateOf(weather!!.location.country)
     }
 
+    val context = LocalContext.current
+
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
         Column(verticalArrangement = Arrangement.Center, modifier = Modifier.padding(bottom = 100.dp)) {
@@ -89,7 +94,7 @@ fun Background(weather: WeatherData?, weatherViewModel: ViewModelScreen) {
                     str = state.curWeather!!.current.condition.icon
 
                 } catch (e: Exception) {
-                    println("ERROR")
+                    Toast.makeText(context, "Town not found!", Toast.LENGTH_SHORT).show()
                 }
 
             }
