@@ -1,6 +1,9 @@
 package com.example.myweatherapp.views
 
 import android.widget.Toast
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -22,9 +26,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -45,10 +51,13 @@ fun MainMenu(weatherViewModel: ViewModelScreen = viewModel()) {
 
     val weather = weatherUiState.curWeather
 
-    if (weather != null) {
-        Background(weather, weatherViewModel)
+    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+        .fillMaxSize()
+        .background(color = colorResource(id =  com.example.myweatherapp.R.color.columbia))) {
+        if (weather != null) {
+            Background(weather, weatherViewModel)
+        }
     }
-
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -71,7 +80,9 @@ fun Background(weather: WeatherData?, weatherViewModel: ViewModelScreen) {
 
     val context = LocalContext.current
 
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally,
+    Column(modifier = Modifier
+        .background(color = colorResource(id =  com.example.myweatherapp.R.color.light))
+        .padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
 
         Text("Weather info: ", fontWeight = FontWeight.Bold)
@@ -99,7 +110,7 @@ fun Background(weather: WeatherData?, weatherViewModel: ViewModelScreen) {
                     val result = WeatherAPI.retrofitService.getWeatherInfo(BASE_KEY, text.text, "1", "no", "no")
                     state = WeatherUiState(result)
                     country = state.curWeather!!.location.country
-                    weather!!.location.name = state.curWeather!!.location.name
+                    weather.location.name = state.curWeather!!.location.name
                     weather.current.condition.text = state.curWeather!!.current.condition.text
                     weather.current.temp_c = state.curWeather!!.current.temp_c
                     str = state.curWeather!!.current.condition.icon
@@ -110,7 +121,9 @@ fun Background(weather: WeatherData?, weatherViewModel: ViewModelScreen) {
 
             }
             }) {
+
                 Text(text = "Show Me!")
+
             }
         }
 
